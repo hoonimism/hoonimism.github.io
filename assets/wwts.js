@@ -21,6 +21,7 @@ var fr=w.querySelector(".frame"),v=w.querySelector("video"),pb=w.querySelector("
 v.addEventListener("loadedmetadata",function(){if(v.videoWidth&&v.videoHeight)fr.style.aspectRatio=v.videoWidth+"/"+v.videoHeight;fr.classList.add("ready")});
 pb.addEventListener("click",function(){v.controls=true;v.play();fr.classList.add("playing")});
 v.addEventListener("play",function(){fr.classList.add("playing")});
+var tried=0;v.addEventListener("error",function(){if(!tried++)v.src="/video/"+k+".mp4?r="+Date.now()});
 v.src="/video/"+k+".mp4?v="+Math.floor(Date.now()/600000);
 var cv=w.querySelector("canvas"),x=cv.getContext("2d"),W,H,P=[],d=Math.min(window.devicePixelRatio||1,2);
 function sz(){var r=cv.getBoundingClientRect();W=cv.width=r.width*d;H=cv.height=r.height*d;P=[];for(var i=0;i<600;i++){var u=Math.random(),q=Math.random()*6.283;P.push({q:q,r:Math.sqrt(u),s:(Math.random()-.5)*.00025,z:Math.random(),j:Math.random()*6.283})}}
