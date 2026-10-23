@@ -1,3 +1,4 @@
+var IC={"prologue": '<svg viewBox="0 0 220 600"><ellipse cx="110" cy="300" rx="108" ry="298"/></svg>', "still": '<svg viewBox="0 0 232 600"><g fill="none" stroke-width="22"><ellipse cx="116" cy="300" rx="104" ry="288"/><ellipse cx="116" cy="388" rx="80" ry="200"/></g><circle cx="116" cy="526" r="62"/></svg>', "crack": '<svg viewBox="0 0 274 600"><ellipse cx="124" cy="300" rx="104" ry="289" fill="none" stroke-width="20" transform="rotate(-4 124 300)"/><circle cx="36" cy="128" r="36"/><circle cx="198" cy="484" r="76"/></svg>', "winter": '<svg viewBox="0 0 248 600"><circle cx="124" cy="52" r="50"/><circle cx="124" cy="215" r="77"/><circle cx="124" cy="476" r="124"/></svg>', "shell": '<svg viewBox="0 0 296 588"><g fill="none" stroke-width="20"><ellipse cx="148" cy="155" rx="138" ry="146"/><ellipse cx="148" cy="470" rx="102" ry="108"/></g><circle cx="148" cy="190" r="108"/><circle cx="148" cy="438" r="76"/></svg>'};
 var CH={
 prologue:{n:"Prologue",dy:-6,en:"“ THE WORLD IS MY REPRESENTATION ”",ko:"“ 세계는 나의 표상이다 ”",cite:"— Arthur Schopenhauer, 1818"},
 shell:{n:"Shell",dy:-3,poem:1,en:"Within each shell exists a world of its own.",ko:"각자의 껍질 안에는 각자의 세계가 존재한다."},
@@ -10,14 +11,14 @@ var m=document.createElement("meta");m.name="theme-color";m.content="#050505";do
 var k=document.body.getAttribute("data-chapter"),c=CH[k];if(!c)return;
 document.title=c.n+" — World Within The Shell";
 var w=document.createElement("main");w.className="wrap";
-w.innerHTML='<header><svg viewBox="0 0 14 28" aria-hidden="true"><ellipse cx="7" cy="14" rx="6" ry="13" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="7" cy="'+(14+c.dy)+'" r="3.2" fill="currentColor"/></svg><div class="chap"></div><div class="series">World Within<br>The Shell</div></header>'+
+w.innerHTML='<header><span class="ic" aria-hidden="true">'+IC[k]+'</span><div class="chap"></div><div class="series">World Within<br>The Shell</div></header>'+
 '<section class="stage"><div class="frame"><video playsinline preload="metadata"></video><canvas></canvas><div class="state">Coming soon · 영상 준비 중</div><button class="play" aria-label="영상 재생"></button></div>'+
 '<div class="text"><p class="en"></p><p class="ko"></p><p class="cite"></p></div></section>'+
 '<footer><span>김성훈 / Kim Sunghoon</span><span>2026</span></footer>';
 document.body.appendChild(w);
 w.querySelector(".chap").textContent=c.n;w.querySelector(".en").textContent=c.en;w.querySelector(".ko").textContent=c.ko;
 var ci=w.querySelector(".cite");if(c.cite)ci.textContent=c.cite;else ci.remove();
-if(c.poem){w.querySelector(".frame").remove();w.querySelector(".text").style.order=2;var ps=document.createElement("script");ps.src="/assets/poem.js?v=2";document.body.appendChild(ps);return}
+if(c.poem){w.querySelector(".frame").remove();w.querySelector(".text").style.order=2;var ps=document.createElement("script");ps.src="/assets/poem.js?v=3";document.body.appendChild(ps);return}
 var fr=w.querySelector(".frame"),v=w.querySelector("video"),pb=w.querySelector(".play");
 v.addEventListener("loadedmetadata",function(){if(v.videoWidth&&v.videoHeight)fr.style.aspectRatio=v.videoWidth+"/"+v.videoHeight;fr.classList.add("ready")});
 pb.addEventListener("click",function(){v.controls=true;v.play();fr.classList.add("playing")});
