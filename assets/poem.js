@@ -55,7 +55,6 @@ next()});
 
 function tick(now){requestAnimationFrame(tick);if(!ready||!visible)return;
 var el=now-t0;
-if(el>(stage===0?11000:9000)&&now-last>9000)next();
 el=now-t0;var tg=tgt();
 x.clearRect(0,0,W*d,H*d);
 for(var i=0;i<N;i++){if(el<P.dl[i]){P.x[i]+=P.vx[i]*=.95;P.y[i]+=P.vy[i]*=.95;continue}var k=P.k[i];P.x[i]+=(tg.x[i]-P.x[i])*k;P.y[i]+=(tg.y[i]-P.y[i])*k;P.a[i]+=(tg.a[i]-P.a[i])*.05}
