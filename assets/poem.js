@@ -35,7 +35,9 @@ return{x:tx,y:ty,a:ta}}
 function imgRender(im){return function(c,w,h){c.fillStyle="#fff";c.fillRect(0,0,w,h);var s=Math.min(w/im.width,h/im.height)*.96,iw=im.width*s,ih=im.height*s;
 c.drawImage(im,(w-iw)/2,(h-ih)/2,iw,ih);var g=c.getImageData(0,0,w,h),D=g.data;for(var i=0;i<D.length;i+=4){var v=255-D[i];D[i]=D[i+1]=D[i+2]=v}c.putImageData(g,0,0)}}
 
-function build(){var r=fr.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;
+var PC=null,BW=0;
+function build(){var r=fr.getBoundingClientRect();W=r.width;H=r.height;BW=Math.round(W);cv.width=W*d;cv.height=H*d;
+PC=document.createElement("canvas");PC.width=cv.width;PC.height=cv.height;drawPoem(PC.getContext("2d"),1);
 N=Math.round(Math.min(9000,Math.max(4500,W*H*.04)));
 T=[sample(function(c,w,h){c.fillStyle="#000";c.fillRect(0,0,w,h);drawPoem(c,1)})];
 imgs.forEach(function(im){T.push(im?sample(imgRender(im)):T[0])});
@@ -60,12 +62,13 @@ for(var i=0;i<N;i++){if(el<P.dl[i]){P.x[i]+=P.vx[i]*=.95;P.y[i]+=P.vy[i]*=.95;co
 /* crisp text fades in once the poem has settled */
 var want=stage===0&&el>4200?1:0;textA+=(want-textA)*(want?.03:.25);
 var pa=1-textA*.85,sz=Math.round(2*d),gr=sz;
-for(var b=0;b<4;b++){x.fillStyle="rgba(233,231,227,"+((b+1)/4*pa).toFixed(3)+")";x.beginPath();
-for(var i=0;i<N;i++){var q=P.a[i]*4|0;if(q>3)q=3;if(q===b)x.rect(Math.round(P.x[i]/gr)*gr,Math.round(P.y[i]/gr)*gr,sz-1,sz-1)}x.fill()}
-if(textA>.01)drawPoem(x,textA)}
+var B=[new Path2D(),new Path2D(),new Path2D(),new Path2D()];
+for(var i=0;i<N;i++){var q=P.a[i]*4|0;if(q>3)q=3;B[q].rect(Math.round(P.x[i]/gr)*gr,Math.round(P.y[i]/gr)*gr,sz-1,sz-1)}
+for(var b=0;b<4;b++){x.fillStyle="rgba(233,231,227,"+((b+1)/4*pa).toFixed(3)+")";x.fill(B[b])}
+if(textA>.01){x.globalAlpha=textA;x.drawImage(PC,0,0);x.globalAlpha=1}}
 
 if("IntersectionObserver"in window)new IntersectionObserver(function(e){visible=e[0].isIntersecting}).observe(fr);
 var fontReady=document.fonts&&document.fonts.load?document.fonts.load(FONT.replace("{s}","12")+"","가"):Promise.resolve();
 Promise.all([fontReady].concat(IMGS.map(load))).then(function(r){imgs=r.slice(1);build();ready=true;go(0);last=performance.now();textA=1;requestAnimationFrame(tick)});
-var rt;addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){if(ready){var s=stage;build();go(s)}},250)});
+var rt;addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){if(!ready)return;var w=Math.round(fr.getBoundingClientRect().width);if(Math.abs(w-BW)<2)return;var s=stage;build();go(s)},300)});
 })();
