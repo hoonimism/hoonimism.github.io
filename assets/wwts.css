@@ -5,7 +5,8 @@ html,body{margin:0;background:var(--bg)}
 body{color:var(--fg);font-family:var(--sans);font-weight:300;-webkit-text-size-adjust:100%;overscroll-behavior:none}
 .wrap{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;max-width:640px;margin:0 auto;padding-top:max(18px,env(safe-area-inset-top,0px));padding-bottom:max(18px,env(safe-area-inset-bottom,0px))}
 header{display:flex;align-items:center;gap:12px;padding:6px var(--gut) 0}
-header svg{width:12px;height:24px;flex:none}
+header .ic{display:flex;height:28px;flex:none;color:var(--fg)}
+header .ic svg{height:100%;width:auto;fill:currentColor;stroke:currentColor}
 .chap{font-size:16px;letter-spacing:.02em}
 .series{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;text-align:right}
 .stage{flex:1;display:flex;flex-direction:column;justify-content:center;gap:28px;padding-block:24px}
