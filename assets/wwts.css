@@ -28,3 +28,9 @@ header svg{width:12px;height:24px;flex:none}
 footer{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin:0 var(--gut)}
 @media (min-width:700px){.frame{border:1px solid var(--line)}}
 @media (prefers-reduced-motion:reduce){.frame canvas{display:none}}
+.poemfx{padding:8px 0 0}
+.pframe{position:relative;width:min(100%,calc(78svh*3/4));aspect-ratio:3/4;margin:0 auto;background:#000;overflow:hidden;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.pframe canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.plabel,.phint{position:absolute;bottom:10px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;pointer-events:none}
+.plabel{left:12px}.phint{right:12px;transition:opacity .6s}
+@media (min-width:700px){.pframe{border:1px solid var(--line)}}

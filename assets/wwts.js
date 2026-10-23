@@ -1,7 +1,7 @@
 var CH={
 prologue:{n:"Prologue",dy:-6,en:"“ THE WORLD IS MY REPRESENTATION ”",ko:"“ 세계는 나의 표상이다 ”",cite:"— Arthur Schopenhauer, 1818"},
 shell:{n:"Shell",dy:-3,en:"Within each shell exists a world of its own.",ko:"각자의 껍질 안에는 각자의 세계가 존재한다."},
-crack:{n:"Crack",dy:0,en:"My world extends only as far as I can perceive its boundaries",ko:"나의 세계는 내가 인지하는 만큼의 경계를 가진다."},
+crack:{n:"Crack",dy:0,poem:1,en:"My world extends only as far as I can perceive its boundaries",ko:"나의 세계는 내가 인지하는 만큼의 경계를 가진다."},
 still:{n:"Still, Birth",dy:5,en:"Every dream holds an awakening. Nothing awakens unchanged.",ko:"꿈은 깨어남을 품고 있다. 깨어난 꿈은 이전과 같을 수 없다."},
 winter:{n:"Winter",dy:9,en:"The season you awaken to may be winter.",ko:"깨어난 계절은 겨울일지도 모른다."}
 };
@@ -28,4 +28,5 @@ function sz(){var r=cv.getBoundingClientRect();W=cv.width=r.width*d;H=cv.height=
 function t(ms){if(fr.classList.contains("ready"))return;x.clearRect(0,0,W,H);var cx=W/2,cy=H/2,R=Math.min(W,H)*.36;
 for(var i=0;i<P.length;i++){var p=P[i],q=p.q+ms*p.s,b=1+Math.sin(ms*.0006+p.j)*.04;x.fillStyle="rgba(233,231,227,"+(.12+p.z*.55)+")";x.fillRect(cx+Math.cos(q)*R*.62*p.r*b,cy+Math.sin(q)*R*p.r*b,1.1*d,1.1*d)}requestAnimationFrame(t)}
 sz();addEventListener("resize",sz);requestAnimationFrame(t);
+if(c.poem){var ps=document.createElement("script");ps.src="/assets/poem.js?v=1";document.body.appendChild(ps)}
 })();
